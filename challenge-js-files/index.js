@@ -6,6 +6,18 @@ getTable2InJson()
 console.log(data_table2);
 getTable1InJson()
 
+
+// graph2
+var svg = dimple.newSvg("#table2", 590, 400);
+var myChart = new dimple.chart(svg, data_table2);
+myChart.setBounds(60, 30, 510, 330)
+myChart.addCategoryAxis("x", "Country");
+myChart.addMeasureAxis("y", "2010–12");
+myChart.addSeries("Country", dimple.plot.bar);
+myChart.addLegend(65, 10, 510, 20, "right"); // on s en
+myChart.draw();
+
+
 function getTable1InJson(){
     let country = table1.children[1].children[0].children[1].innerHTML; // le pays
     let y1 = table1.children[2].children[0].children[2].innerHTML; 
@@ -35,3 +47,4 @@ function getTable2InJson(){
         });
     }
 }
+
