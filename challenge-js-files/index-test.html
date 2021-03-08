@@ -1,48 +1,58 @@
 <!DOCTYPE html>
 <html lang="fr">
-  <head>
+
+<head>
     <meta charset="utf-8" />
     <title>Titre de la page</title>
-    <link rel="stylesheet" href="style.css" />
-    <script src="script.js"></script>
-  </head>
-  <body>
+</head>
+
+<body>
     ...
-    <canvas id="myChart"></canvas>
+    <div id="myChart"></div>
     ...
-  </body>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+</body>
 
-  <script>
-    var ctx = document.getElementById("myChart").getContext("2d");
-    var chart = new Chart(ctx, {
-      // The type of chart we want to create
-      type: "line",
 
-      // The data for our dataset
-      data: {
-        labels: [
-          "January",
-          "February",
-          "March",
-          "April",
-          "May",
-          "June",
-          "July",
-          "aout",
-        ],
-        datasets: [
-          {
-            label: "My First dataset",
-            backgroundColor: "rgb(255, 99, 132)",
-            borderColor: "rgb(255, 99, 132)",
-            data: [0, 10, 5, 2, 20, 30, 45, 42],
-          },
-        ],
-      },
+<script src="http://d3js.org/d3.v4.min.js"></script>
+<script src="http://dimplejs.org/dist/dimple.v2.3.0.min.js"></script>
+<script>
+    let data = [{
+            "Country": "Latvia",
+            "2007–09": 312,
+            "2010–12": 312
+        },
+        {
+            "Country": "Lithuania",
+            "2007–09": 247,
+            "2010–12": 307
+        },
+        {
+            "Country": "Estonia",
+            "2007–09": 266,
+            "2010–12": 253
+        },
+        {
+            "Country": "Czech Republic",
+            "2007–09": 198,
+            "2010–12": 217
+        },
+        {
+            "Country": "Poland",
+            "2007–09": 228,
+            "2010–12": 214
+        }
+    ]
 
-      // Configuration options go here
-      options: {},
-    });
-  </script>
+
+    var svg = dimple.newSvg("#myChart", 590, 400);
+    var myChart = new dimple.chart(svg, data);
+    myChart.setBounds(60, 30, 510, 330)
+    myChart.addCategoryAxis("x", "Country");
+    myChart.addMeasureAxis("y", "2010–12");
+    myChart.addSeries("Country", dimple.plot.bar);
+    myChart.addLegend(65, 10, 510, 20, "right"); // on s en
+    myChart.draw();
+</script>
+
+
 </html>
