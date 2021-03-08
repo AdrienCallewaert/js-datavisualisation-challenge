@@ -1,21 +1,48 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr">
-    <head>
-        <script src="http://d3js.org/d3.v4.min.js"></script>
-        <script src="http://dimplejs.org/dist/dimple.v2.3.0.min.js"></script>
-      </head>
-      <body>
-        <script type="text/javascript">
-          var svg = dimple.newSvg("body", 800, 600);
-          var data = [
-            { "Word":"Hello", "Awesomeness":2000 },
-            { "Word":"World", "Awesomeness":3000 }
-          ];
-          var chart = new dimple.chart(svg, data);
-          chart.addCategoryAxis("x", "Word");
-          chart.addMeasureAxis("y", "Awesomeness");
-          chart.addSeries(null, dimple.plot.bar);
-          chart.draw();
-        </script>
-      </body>
+  <head>
+    <meta charset="utf-8" />
+    <title>Titre de la page</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js"></script>
+  </head>
+  <body>
+    ...
+    <canvas id="myChart"></canvas>
+    ...
+  </body>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+
+  <script>
+    var ctx = document.getElementById("myChart").getContext("2d");
+    var chart = new Chart(ctx, {
+      // The type of chart we want to create
+      type: "line",
+
+      // The data for our dataset
+      data: {
+        labels: [
+          "January",
+          "February",
+          "March",
+          "April",
+          "May",
+          "June",
+          "July",
+          "aout",
+        ],
+        datasets: [
+          {
+            label: "My First dataset",
+            backgroundColor: "rgb(255, 99, 132)",
+            borderColor: "rgb(255, 99, 132)",
+            data: [0, 10, 5, 2, 20, 30, 45, 42],
+          },
+        ],
+      },
+
+      // Configuration options go here
+      options: {},
+    });
+  </script>
 </html>
