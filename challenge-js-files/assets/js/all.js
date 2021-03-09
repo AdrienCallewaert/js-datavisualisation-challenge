@@ -58,7 +58,6 @@ let barChartData = {
 
 };
 
-
 let barChartData1 = {
     labels:dataPays,
     datasets: [{
@@ -132,6 +131,7 @@ let barChartData1 = {
     }]   
 }
 
+// console.log(barChartData1);
 
 
 
@@ -151,57 +151,120 @@ function getTable2InJson(){
 
 window.onload = function () {
 
-    let ctx1 = document.getElementById('canvas1').getContext('2d');
-    window.myLine = new Chart(ctx1, {
-            type: 'line',
-            data: barChartData1,
-            options: {
-                responsive: true,
-                title: {
-                    display: true,
-                    text: 'Chart.js Line Chart'
-                },
-                tooltips: {
-                    mode: 'index',
-                    intersect: false,
-                },
-                hover: {
-                    mode: 'nearest',
-                    intersect: true
-                },
-                scales: {
-                    xAxes: [{
-                        display: true,
-                        scaleLabel: {
-                            display: true,
-                            labelString: 'Month'
-                        }
-                    }],
-                    yAxes: [{
-                        display: true,
-                        scaleLabel: {
-                            display: true,
-                            labelString: 'Value'
-                        }
-                    }]
-                }
-            }
-    });
 
-    let ctx2 = document.getElementById('canvas2').getContext('2d');
-    window.myBar = new Chart(ctx2, {
-        type: 'horizontalBar',
-        data: barChartData,
-        options: {
-            responsive: true,
-            legend: {
-                position: 'right',
-            },
-            title: {
-                display: true,
-                text: 'Prison population'
-            }
-        }
-    });
 
+// Graph canvasAjax
+  let graphAjax = () => {
+    let ctx = document.getElementById("canvasAjax").getContext("2d");
+    let dataPoints = [];
+    let label = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+    let i = 9;
+    let chart0 = new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: label,
+        datasets: [
+          {
+            label: ["number of arrests"],
+            borderColor: "#3e95cd",
+            data: dataPoints,
+          },
+        ],
+      },
+    });
+//majAjax
+    function majAjax() {
+      i++;
+      label.push(i);
+      fetch("https://canvasjs.com/services/data/datapoints.php")
+        .then(function (response) {
+          return response.json();
+        })
+        .then(function (data) {
+          dataPoints.length + 1;
+          data.forEach((element) => dataPoints.push(parseInt(element[1])));
+          chart0.update();
+        });
+    }
+    setInterval(majAjax, 2000);
+  };
+  graphAjax();
+
+
+
+  //Graph 1
+  let ctx1 = document.getElementById("canvas1").getContext("2d");
+  window.myLine = new Chart(ctx1, {
+    type: "line",
+    data: {
+      labels: [1500, 1600, 1700, 1750, 1800, 1850, 1900, 1950, 1999, 2050],
+      datasets: [
+        {
+          data: [86, 114, 106, 106, 107, 111, 133, 221, 783, 2478],
+          label: "Africa",
+          borderColor: "#3e95cd",
+          fill: false,
+        },
+        {
+          data: [282, 350, 411, 502, 635, 809, 947, 1402, 3700, 5267],
+          label: "Asia",
+          borderColor: "#8e5ea2",
+          fill: false,
+        },
+        {
+          data: [168, 170, 178, 190, 203, 276, 408, 547, 675, 734],
+          label: "Europe",
+          borderColor: "#3cba9f",
+          fill: false,
+        },
+        {
+          data: [40, 20, 10, 16, 24, 38, 74, 167, 508, 784],
+          label: "Latin America",
+          borderColor: "#e8c3b9",
+          fill: false,
+        },
+        {
+          data: [6, 3, 2, 2, 7, 26, 82, 172, 312, 433],
+          label: "North America",
+          borderColor: "#c45850",
+          fill: false,
+        },
+      ],
+    },
+    options: {
+      title: {
+        display: true,
+      },
+    },
+  });
+
+
+  //Graph 2
+  let ctx2 = document.getElementById("canvas2").getContext("2d");
+  window.myBar = new Chart(ctx2, {
+    type: "horizontalBar",
+    data: barChartData,
+    options: {
+      responsive: true,
+      legend: {
+        position: "right",
+      },
+      title: {
+        display: true,
+        text: "Prison population",
+      },
+    },
+  });
 };
+
+
+
+
+
+
+
+
+
+
+
+
