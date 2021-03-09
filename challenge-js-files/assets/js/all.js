@@ -37,10 +37,10 @@ var config = {
             backgroundColor:'rgb(255, 99, 132)',
             borderColor: 'rgb(255, 99, 132)',
             data: data2002,
-            fill: false,
+   
         }, {
             label: '2003',
-            fill: false,
+      
             backgroundColor: 'rgb(255, 159, 64)',
             borderColor:'rgb(255, 159, 64)',
             data: data2003,
@@ -135,83 +135,64 @@ var config = {
     }
 };
 
-export { config };
 
+const table2 = document.getElementById("table2"); // table 2
+const tailleTable2 = 30;
+let data_table2 = []; // data de la table2
 
-/*
+getTable2InJson()
 
-		var config = {
-			type: 'line',
-			data: {
-				labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-				datasets: [{
-					label: 'My First dataset',
-					backgroundColor: window.chartColors.red,
-					borderColor: window.chartColors.red,
-					data: [
-						randomScalingFactor(),
-						randomScalingFactor(),
-						randomScalingFactor(),
-						randomScalingFactor(),
-						randomScalingFactor(),
-						randomScalingFactor(),
-						randomScalingFactor()
-					],
-					fill: false,
-				}, {
-					label: 'My Second dataset',
-					fill: false,
-					backgroundColor: window.chartColors.blue,
-					borderColor: window.chartColors.blue,
-					data: [
-						randomScalingFactor(),
-						randomScalingFactor(),
-						randomScalingFactor(),
-						randomScalingFactor(),
-						randomScalingFactor(),
-						randomScalingFactor(),
-						randomScalingFactor()
-					],
-				}]
-			},
-			options: {
-				responsive: true,
-				title: {
-					display: true,
-					text: 'Chart.js Line Chart'
-				},
-				tooltips: {
-					mode: 'index',
-					intersect: false,
-				},
-				hover: {
-					mode: 'nearest',
-					intersect: true
-				},
-				scales: {
-					xAxes: [{
-						display: true,
-						scaleLabel: {
-							display: true,
-							labelString: 'Month'
-						}
-					}],
-					yAxes: [{
-						display: true,
-						scaleLabel: {
-							display: true,
-							labelString: 'Value'
-						}
-					}]
-				}
-			}
-		};
+let data0=data_table2.splice(0, tailleTable2); // stock les pays
+let data1=data_table2.splice(0, tailleTable2); // stocks la premiere anne
 
-		window.onload = function() {
-			var ctx = document.getElementById('canvas').getContext('2d');
-			window.myLine = new Chart(ctx, config);
-		};
+let barChartData = {
+    labels:data0,
+    datasets: [{
+        label: '2007-09',
+        backgroundColor: 'rgb(255, 99, 132)',
+        borderColor: 'rgb(255, 99, 132)',
+        borderWidth: 1,
+        data: data1
+    }, {
+        label: '2010-12',
+        backgroundColor: 'rgb(75, 192, 192)',
+        borderColor: 'rgb(75, 192, 192)',
+        borderWidth: 1,
+        data: data_table2
+    }]
 
+};
 
-	
-*/
+function getTable2InJson(){
+    // les enfants de tr 4
+    for (let i = 1; i < table2.children[2].children[1].children.length; i++) {
+       // les enfants de td 26+
+        for (let j = 0; j < table2.children[2].children.length; j++) {
+            data_table2.push(table2.children[2].children[j].children[i].innerHTML.trim())
+        }
+    }
+
+}
+
+window.onload = function () {
+
+    let ctx1 = document.getElementById('canvas1').getContext('2d');
+    window.myLine = new Chart(ctx1, config);
+
+    let ctx2 = document.getElementById('canvas2').getContext('2d');
+    window.myBar = new Chart(ctx2, {
+        type: 'horizontalBar',
+        data: barChartData,
+        options: {
+            responsive: true,
+            legend: {
+                position: 'right',
+            },
+            title: {
+                display: true,
+                text: 'Prison population'
+            }
+        }
+    });
+
+};

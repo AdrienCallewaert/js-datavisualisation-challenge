@@ -1,20 +1,12 @@
 const table2 = document.getElementById("table2"); // table 2
-const tailleTable = 30;
+const tailleTable2 = 30;
 let data_table2 = []; // data de la table2
 
-// window.chartColors = {
-// 	red: 'rgb(255, 99, 132)',
-// 	orange: 'rgb(255, 159, 64)',
-// 	yellow: 'rgb(255, 205, 86)',
-// 	green: 'rgb(75, 192, 192)',
-// 	blue: 'rgb(54, 162, 235)',
-// 	purple: 'rgb(153, 102, 255)',
-// 	grey: 'rgb(201, 203, 207)'
-// };
-
 getTable2InJson()
-let data0=data_table2.splice(0, tailleTable); // stock les pays
-let data1=data_table2.splice(0, tailleTable); // stocks la premiere anne
+
+let data0=data_table2.splice(0, tailleTable2); // stock les pays
+let data1=data_table2.splice(0, tailleTable2); // stocks la premiere anne
+
 let barChartData = {
     labels:data0,
     datasets: [{
@@ -33,25 +25,7 @@ let barChartData = {
 
 };
 
-
-window.onload = function () {
-    var ctx = document.getElementById('canvas').getContext('2d');
-    window.myBar = new Chart(ctx, {
-        type: 'horizontalBar',
-        data: barChartData,
-        options: {
-            responsive: true,
-            legend: {
-                position: 'right',
-            },
-            title: {
-                display: true,
-                text: 'Prison population'
-            }
-        }
-    });
-
-};
+export { barChartData };
 
 function getTable2InJson(){
     // les enfants de tr 4
