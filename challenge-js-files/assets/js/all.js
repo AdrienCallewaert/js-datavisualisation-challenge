@@ -11,8 +11,16 @@ let data_table2 = []; // data de la table2
 getTable1InJson()
 getTable2InJson();
 
-createDatasetsObjectInArray() // only for table1 (create perfect object per label)
-
+//createDatasetsObjectInArray() // only for table1 (create perfect object per label)
+for (let i = 0; i < table1_pays.length; i++) {
+    lineChartData_datasets.push({
+        label: table1_pays[i],
+        fill:false,
+        backgroundColor: randomColorRgb(),
+        borderColor: randomColorRgb(),
+        data: data_table1.splice(0, tailleTable1)
+    })
+}
 let lineChartData = {
     labels: [2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012],
     datasets: lineChartData_datasets,  
@@ -34,7 +42,7 @@ let barChartData = {
     }]
 
 };
-graphAjax();
+
 window.onload = function () {
     let ctx1 = document.getElementById('canvas1').getContext('2d');
     let canvas1 = new Chart(ctx1, {
@@ -122,7 +130,9 @@ window.onload = function () {
           chart0.update();
         });
     }
+    graphAjax();
     setInterval(majAjax, 2000);
+    
 };
 
  
@@ -146,15 +156,7 @@ function getTable2InJson(){
 
 // here only for table1
 function createDatasetsObjectInArray() {
-    for (let i = 0; i < table1_pays.length; i++) {
-        lineChartData_datasets.push({
-            label: table1_pays[i],
-            fill:false,
-            backgroundColor: randomColorRgb(),
-            borderColor: randomColorRgb(),
-            data: data_table1.splice(0, tailleTable1)
-        })
-    }
+
 }
 
 //random color rgb
