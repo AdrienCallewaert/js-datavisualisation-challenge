@@ -8,7 +8,7 @@
 
 <body>
     ...
-    <div id="myChart"></div>
+    <canvas id="canvas" width="604" height="302" class="chartjs-render-monitor"></canvas>
     ...
 </body>
 
@@ -17,14 +17,46 @@
 <script src="http://dimplejs.org/dist/dimple.v2.3.0.min.js"></script>
 <script>
 
-    var svg = dimple.newSvg("#myChart", 590, 400);
-    var myChart = new dimple.chart(svg, data);
-    myChart.setBounds(60, 30, 510, 330)
-    myChart.addCategoryAxis("x", "Country");
-    myChart.addMeasureAxis("y", "2010–12");
-    myChart.addSeries("Country", dimple.plot.bar);
-    myChart.addLegend(65, 10, 510, 20, "right"); // on s en
-    myChart.draw();
+    var MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October',
+        'November', 'December'
+    ];
+    var color = Chart.helpers.color;
+    var barChartData = {
+        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+        datasets: [{
+            label: 'Dataset 1',
+            backgroundColor: color(window.chartColors.red).alpha(0.5).rgbString(),
+            borderColor: window.chartColors.red,
+            borderWidth: 1,
+            data: data_table2.splice(30, 30)
+        }, {
+            label: 'Dataset 2',
+            backgroundColor: color(window.chartColors.blue).alpha(0.5).rgbString(),
+            borderColor: window.chartColors.blue,
+            borderWidth: 1,
+            data: data_table2.splice(60, 30)
+        }]
+
+    };
+
+    window.onload = function () {
+        var ctx = document.getElementById('canvas').getContext('2d');
+        window.myBar = new Chart(ctx, {
+            type: 'bar',
+            data: barChartData,
+            options: {
+                responsive: true,
+                legend: {
+                    position: 'top',
+                },
+                title: {
+                    display: true,
+                    text: 'Chart.js Bar Chart'
+                }
+            }
+        });
+
+    };
 </script>
 
 
