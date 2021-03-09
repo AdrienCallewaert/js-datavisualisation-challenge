@@ -108,7 +108,7 @@ let graphAjax = () => {
       },
     });
 //majAjax
-    function majAjax() {
+    function majAjax(){ 
       i++;
       label.push(i);
       fetch("https://canvasjs.com/services/data/datapoints.php")
@@ -119,9 +119,10 @@ let graphAjax = () => {
           dataPoints.length + 1;
           data.forEach((element) => dataPoints.push(parseInt(element[1])));
           chart0.update();
+
         });
     }
-    setInterval(majAjax, 2000);
+    majAjax();
   };
   graphAjax();
 };
@@ -132,7 +133,7 @@ let graphAjax = () => {
 
 function getTable1InJson(){
     let tdTable1 = document.querySelectorAll("#table1 td")
-    pays = [...tdTable1].filter((td,index) => index%12 == 0 ? td.innerText : false).map(td => td.innerHTML);
+    table1_pays = [...tdTable1].filter((td,index) => index%12 == 0 ? td.innerText : false).map(td => td.innerHTML);
     data_table1 = [...tdTable1].filter((td,index) => index%12 !== 0 ? td.innerText : false).map(td => parseInt(td.innerHTML));
 }
 
