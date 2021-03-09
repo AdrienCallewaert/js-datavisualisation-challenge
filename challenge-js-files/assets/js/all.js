@@ -34,7 +34,6 @@ let barChartData = {
     }]
 
 };
-graphAjax();
 window.onload = function () {
     let ctx1 = document.getElementById('canvas1').getContext('2d');
     let canvas1 = new Chart(ctx1, {
@@ -89,25 +88,25 @@ window.onload = function () {
         }
     })
 
-    let graphAjax = () => {
-        let ctx = document.getElementById("canvasAjax").getContext("2d");
-        let dataPoints = [];
-        let label = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-        let i = 9;
-        let chart0 = new Chart(ctx, {
-            type: "line",
-            data: {
-                labels: label,
-                datasets: [
-                {
-                    label: ["number of arrests"],
-                    borderColor: "#3e95cd",
-                    data: dataPoints,
-                },
-                ],
-            },
-        });
-    }
+// Graph canvasAjax
+let graphAjax = () => {
+    let ctx = document.getElementById("canvasAjax").getContext("2d");
+    let dataPoints = [];
+    let label = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+    let i = 9;
+    let chart0 = new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: label,
+        datasets: [
+          {
+            label: ["number of arrests"],
+            borderColor: "#3e95cd",
+            data: dataPoints,
+          },
+        ],
+      },
+    });
 //majAjax
     function majAjax() {
       i++;
@@ -123,7 +122,10 @@ window.onload = function () {
         });
     }
     setInterval(majAjax, 2000);
+  };
+  graphAjax();
 };
+
 
  
 
