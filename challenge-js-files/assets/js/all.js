@@ -11,16 +11,8 @@ let data_table2 = []; // data de la table2
 getTable1InJson()
 getTable2InJson();
 
-//createDatasetsObjectInArray() // only for table1 (create perfect object per label)
-for (let i = 0; i < table1_pays.length; i++) {
-    lineChartData_datasets.push({
-        label: table1_pays[i],
-        fill:false,
-        backgroundColor: randomColorRgb(),
-        borderColor: randomColorRgb(),
-        data: data_table1.splice(0, tailleTable1)
-    })
-}
+createDatasetsObjectInArray() // only for table1 (create perfect object per label)
+
 let lineChartData = {
     labels: [2002,2003,2004,2005,2006,2007,2008,2009,2010,2011,2012],
     datasets: lineChartData_datasets,  
@@ -42,7 +34,6 @@ let barChartData = {
     }]
 
 };
-
 window.onload = function () {
     let ctx1 = document.getElementById('canvas1').getContext('2d');
     let canvas1 = new Chart(ctx1, {
@@ -97,50 +88,51 @@ window.onload = function () {
         }
     })
 
+        // Graph canvasAjax
     let graphAjax = () => {
         let ctx = document.getElementById("canvasAjax").getContext("2d");
         let dataPoints = [];
         let label = [1, 2, 3, 4, 5, 6, 7, 8, 9];
         let i = 9;
         let chart0 = new Chart(ctx, {
-            type: "line",
-            data: {
-                labels: label,
-                datasets: [
-                {
-                    label: ["number of arrests"],
-                    borderColor: "#3e95cd",
-                    data: dataPoints,
-                },
-                ],
+        type: "line",
+        data: {
+            labels: label,
+            datasets: [
+            {
+                label: ["number of arrests"],
+                borderColor: "#3e95cd",
+                data: dataPoints,
             },
+            ],
+        },
         });
-    }
-//majAjax
-    function majAjax() {
-      i++;
-      label.push(i);
-      fetch("https://canvasjs.com/services/data/datapoints.php")
-        .then(function (response) {
-          return response.json();
-        })
-        .then(function (data) {
-          dataPoints.length + 1;
-          data.forEach((element) => dataPoints.push(parseInt(element[1])));
-          chart0.update();
-        });
-    }
-    graphAjax();
-    setInterval(majAjax, 2000);
-    
+        //majAjax
+        function majAjax() {
+        i++;
+        label.push(i);
+        fetch("https://canvasjs.com/services/data/datapoints.php")
+            .then(function (response) {
+            return response.json();
+            })
+            .then(function (data) {
+            dataPoints.length + 1;
+            data.forEach((element) => dataPoints.push(parseInt(element[1])));
+            chart0.update();
+            });
+        }
+        setInterval(majAjax, 2000);
+    };
+  graphAjax();
 };
+
 
  
 
 
 function getTable1InJson(){
     let tdTable1 = document.querySelectorAll("#table1 td")
-    pays = [...tdTable1].filter((td,index) => index%12 == 0 ? td.innerText : false).map(td => td.innerHTML);
+    table1_pays = [...tdTable1].filter((td,index) => index%12 == 0 ? td.innerText : false).map(td => td.innerHTML);
     data_table1 = [...tdTable1].filter((td,index) => index%12 !== 0 ? td.innerText : false).map(td => parseInt(td.innerHTML));
 }
 
@@ -156,7 +148,15 @@ function getTable2InJson(){
 
 // here only for table1
 function createDatasetsObjectInArray() {
-
+    for (let i = 0; i < table1_pays.length; i++) {
+        lineChartData_datasets.push({
+            label: table1_pays[i],
+            fill:false,
+            backgroundColor: randomColorRgb(),
+            borderColor: randomColorRgb(),
+            data: data_table1.splice(0, tailleTable1)
+        })
+    }
 }
 
 //random color rgb
