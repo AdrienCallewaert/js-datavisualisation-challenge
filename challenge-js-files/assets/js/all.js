@@ -113,7 +113,7 @@ window.onload = function () {
         ],
       },
     });
-    //majAjax
+    //majAjax v1 (reload)
     function majAjax() {
       i++;
       fetch("https://canvasjs.com/services/data/datapoints.php", {
@@ -132,6 +132,23 @@ window.onload = function () {
           console.table(dataPoints);
           chart0.update();
         });
+
+   //majAjax v2 (push)
+        //i++;
+        //label.push(i);
+        //fetch("https://canvasjs.com/services/data/datapoints.php", {cache: "no-cache"})
+          //.then(function (response) {
+            //return response.json();
+          //})
+          //.then(function (data) {
+            //dataPoints.length + 1;
+            //data.forEach((element) => dataPoints.push(parseInt(element[1])));
+            //chart0.update();
+            //
+          //});
+
+
+
     }
     setInterval(majAjax, 2000);
   };
