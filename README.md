@@ -2,6 +2,8 @@
 
 
 <details close>
+  <summary> The mission :</summary>
+  
   # Javascript Challenge : "Data Visualisation"
 
   - Repository : `js-datavisualisation-challenge`
