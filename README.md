@@ -3,7 +3,7 @@
 Fait le 10/03/2021 a BeCode.
 
 
-**Lien direct vers la page : https://adriencallewaert.github.io/js-datavisualisation-challenge/challenge-js-files/** 
+**[Lien direct vers la page :](https://adriencallewaert.github.io/js-datavisualisation-challenge/challenge-js-files/)** 
 
 ## Team's members
 
