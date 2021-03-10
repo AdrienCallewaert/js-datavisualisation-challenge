@@ -133,6 +133,7 @@ window.onload = function () {
           chart0.update();
         });
 
+
    //majAjax v2 (push)
         //i++;
         //label.push(i);
@@ -146,8 +147,6 @@ window.onload = function () {
             //chart0.update();
             //
           //});
-
-
 
     }
     setInterval(majAjax, 2000);
