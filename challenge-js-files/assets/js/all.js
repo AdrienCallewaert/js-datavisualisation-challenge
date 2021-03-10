@@ -37,133 +37,137 @@ let barChartData = {
   ],
 };
 window.onload = function () {
-  let ctx1 = document.getElementById("canvas1").getContext("2d");
-  let canvas1 = new Chart(ctx1, {
-    type: "line",
-    data: lineChartData,
-    options: {
-      responsive: true,
-      title: {
-        display: true,
-        text: "test",
-      },
-      tooltips: {
-        mode: "index",
-        intersect: false,
-      },
-      hover: {
-        mode: "nearest",
-        intersect: true,
-      },
-      scales: {
-        xAxes: [
-          {
-            display: true,
-            scaleLabel: {
-              display: true,
-              labelString: "pays",
-            },
-          },
-        ],
-        yAxes: [
-          {
-            display: true,
-            scaleLabel: {
-              display: true,
-              labelString: "Value",
-            },
-          },
-        ],
-      },
-    },
-  });
 
-  let ctx2 = document.getElementById("canvas2").getContext("2d");
-  let canvas2 = new Chart(ctx2, {
-    type: "horizontalBar",
-    data: barChartData,
-    options: {
-      responsive: true,
-      legend: {
-        position: "right",
-      },
-      title: {
-        display: true,
-        text: "Prison population",
-      },
-    },
-  });
+
+    table1.before(createCanvas('canvas1'));
+    table2.before(createCanvas('canvas2'));
+  
+    
+    let ctx1 = document.getElementById("canvas1").getContext("2d");
+    let canvas1 = new Chart(ctx1, {
+        type: "line",
+        data: lineChartData,
+        options: {
+        responsive: true,
+        title: {
+            display: true,
+            text: "test",
+        },
+        tooltips: {
+            mode: "index",
+            intersect: false,
+        },
+        hover: {
+            mode: "nearest",
+            intersect: true,
+        },
+        scales: {
+            xAxes: [
+            {
+                display: true,
+                scaleLabel: {
+                display: true,
+                labelString: "pays",
+                },
+            },
+            ],
+            yAxes: [
+            {
+                display: true,
+                scaleLabel: {
+                display: true,
+                labelString: "Value",
+                },
+            },
+            ],
+        },
+        },
+    });
+
+    let ctx2 = document.getElementById("canvas2").getContext("2d");
+    let canvas2 = new Chart(ctx2, {
+        type: "horizontalBar",
+        data: barChartData,
+        options: {
+        responsive: true,
+        legend: {
+            position: "right",
+        },
+        title: {
+            display: true,
+            text: "Prison population",
+        },
+        },
+    });
 
   // Graph canvasAjax
-  let graphAjax = () => {
-    let ctx = document.getElementById("canvasAjax").getContext("2d");
-    let dataPoints = [];
-    let label = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-    let i = 9;
-    let chart0 = new Chart(ctx, {
-      type: "line",
-      data: {
-        labels: label,
-        datasets: [
-          {
-            label: ["number of arrests"],
-            borderColor: "#3e95cd",
-            data: dataPoints,
-          },
-        ],
-      },
-      option: {
-        maintainAspectRatio: false,
-      },
-    });
-    //majAjax v1 (reload)
-    function majAjax() {
-      i++;
-      fetch("https://canvasjs.com/services/data/datapoints.php", {
-        cache: "no-cache",
-      })
-        .then(function (response) {
-          return response.json();
-        })
-        .then(function (data) {
-          let i = 0;
-          // dataPoints.length + 1;
-          data.forEach((element) => {
-            dataPoints[i] = parseInt(element[1]);
-            i++;
-          });
-          chart0.update();
+    let graphAjax = () => {
+        document.getElementById("bodyContent").before(createCanvas('canvasAjax'));
+        let ctx = document.getElementById("canvasAjax").getContext("2d");
+        let dataPoints = [];
+        let label = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+        let i = 9;
+        let chart0 = new Chart(ctx, {
+        type: "line",
+        data: {
+            labels: label,
+            datasets: [
+            {
+                label: ["number of arrests"],
+                borderColor: "#3e95cd",
+                data: dataPoints,
+            },
+            ],
+        },
         });
+        //majAjax v1 (reload)
+        function majAjax() {
+        i++;
+        fetch("https://canvasjs.com/services/data/datapoints.php", {
+            cache: "no-cache",
+        })
+            .then(function (response) {
+            return response.json();
+            })
+            .then(function (data) {
+            let i = 0;
+            // dataPoints.length + 1;
+            data.forEach((element) => {
+                dataPoints[i] = parseInt(element[1]);
+                i++;
+            });
+            chart0.update();
+            });
 
 
-   //majAjax v2 (push)
-        //i++;
-        //label.push(i);
-        //fetch("https://canvasjs.com/services/data/datapoints.php", {cache: "no-cache"})
-          //.then(function (response) {
-            //return response.json();
-          //})
-          //.then(function (data) {
-            //dataPoints.length + 1;
-            //data.forEach((element) => dataPoints.push(parseInt(element[1])));
-            //chart0.update();
-            //
-          //});
+    //majAjax v2 (push)
+            //i++;
+            //label.push(i);
+            //fetch("https://canvasjs.com/services/data/datapoints.php", {cache: "no-cache"})
+            //.then(function (response) {
+                //return response.json();
+            //})
+            //.then(function (data) {
+                //dataPoints.length + 1;
+                //data.forEach((element) => dataPoints.push(parseInt(element[1])));
+                //chart0.update();
+                //
+            //});
 
-    }
-    setInterval(majAjax, 2000);
-  };
-  graphAjax();
+        }
+        setInterval(majAjax, 2000);
+    };
+    graphAjax();
 };
 
 function getTable1InJson() {
-  let tdTable1 = document.querySelectorAll("#table1 td");
-  table1_pays = [...tdTable1]
-    .filter((td, index) => (index % 12 == 0 ? td.innerText : false))
-    .map((td) => td.innerHTML);
-  data_table1 = [...tdTable1]
-    .filter((td, index) => (index % 12 !== 0 ? td.innerText : false))
-    .map((td) => parseInt(td.innerHTML));
+    let tdTable1 = document.querySelectorAll("#table1 td");
+    table1_pays = [...tdTable1]
+        .filter((td, index) => (index % 12 == 0 ? td.innerText : false))
+        .map((td) => td.innerHTML);
+    data_table1 = [...tdTable1]
+        .filter((td, index) => (index % 12 !== 0 ? td.innerText : false))
+        .map((td) => parseInt(td.innerHTML));
 }
 
 function getTable2InJson() {
@@ -198,3 +202,15 @@ function randomColorRgb() {
 function randomRgb() {
   return Math.floor(Math.random() * 256);
 }
+
+// create the canvas
+function createCanvas(id) { 
+    let divCan = document.createElement('div')
+    divCan.classList.add("chart-container");
+    console.log(divCan);
+    divCan.innerHTML = `<canvas id="${id}" height="400">`
+    return divCan
+}
+
+
+
