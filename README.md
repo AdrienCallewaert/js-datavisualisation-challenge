@@ -4,6 +4,13 @@ Fait le 10/03/2021 a BeCode.
 
 
 **Lien direct vers la page : https://adriencallewaert.github.io/js-datavisualisation-challenge/challenge-js-files/** 
+
+## Team's members
+
+* [Adrien Callewaert](https://github.com/AdrienCallewaert)
+* [Romain Mathieu](https://github.com/RomainM27)
+
+
 <details close>
   <summary> The mission :</summary>
   
