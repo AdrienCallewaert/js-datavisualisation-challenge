@@ -112,6 +112,9 @@ window.onload = function () {
           },
         ],
       },
+      option: {
+        maintainAspectRatio: false,
+      },
     });
     //majAjax v1 (reload)
     function majAjax() {
