@@ -155,7 +155,7 @@ window.onload = function () {
             });
 
         }
-        setInterval(majAjax, 2000);
+        setInterval(majAjax, 1000);
     };
     graphAjax();
 };
