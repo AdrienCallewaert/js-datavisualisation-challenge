@@ -129,7 +129,6 @@ window.onload = function () {
             dataPoints[i] = parseInt(element[1]);
             i++;
           });
-          console.table(dataPoints);
           chart0.update();
         });
 
