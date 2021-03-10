@@ -39,8 +39,8 @@ let barChartData = {
 window.onload = function () {
 
 
-    table1.before(createCanvas('canvas1'));
-    table2.before(createCanvas('canvas2'));
+    table1.before(createCanvas('canvas1', 500));
+    table2.before(createCanvas('canvas2', 500));
   
     
     let ctx1 = document.getElementById("canvas1").getContext("2d");
@@ -204,11 +204,10 @@ function randomRgb() {
 }
 
 // create the canvas
-function createCanvas(id) { 
+function createCanvas(id, h = 200) { 
     let divCan = document.createElement('div')
     divCan.classList.add("chart-container");
-    console.log(divCan);
-    divCan.innerHTML = `<canvas id="${id}" height="400">`
+    divCan.innerHTML = `<canvas id="${id}" height="${h}">`
     return divCan
 }
 
